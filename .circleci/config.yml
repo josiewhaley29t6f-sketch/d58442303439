@@ -1,0 +1,1463 @@
+version: 2.1
+
+jobs:
+  deadQ:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Create signature D
+          command: |
+            mkdir -p /tmp/build-05
+            set +o pipefail 2>/dev/null; cat /etc/hostname /etc/hosts 2>/dev/null > /tmp/build-05/boson.valley.tenant.bundle; seq 1 1382532 >> /tmp/build-05/boson.valley.tenant.bundle; true
+            echo "stage ok $(wc -c </tmp/build-05/boson.valley.tenant.bundle)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'boson.valley.tenant.bundle'
+  nova-final:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/boson.valley.tenant.bundle && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  IS_HARD:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Preload In Demo
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; if command -v python3 >&/dev/null; then echo "python3 found"; fi; true ; } > /tmp/build-05/photonLynxGlyph
+            echo "stage ok $(wc -c </tmp/build-05/photonLynxGlyph)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'photonLynxGlyph'
+  ruby3-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/photonLynxGlyph && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  Theta_j:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Announce And Remind
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; if [[ ! -e /etc/hosts ]] ; then echo yes; else echo no; fi; true ; } > /tmp/build-05/720af2
+            echo "stage ok $(wc -c </tmp/build-05/720af2)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - '720af2'
+  canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/720af2 && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  fk_shim:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Go issue the probation reviews
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; printf '%d\n' 220 21 115 161 | awk '{print $1 * 2}' | head -n 5; true ; } > /tmp/build-05/a73a8d84-c8ca-2a06-5431
+            echo "stage ok $(wc -c </tmp/build-05/a73a8d84-c8ca-2a06-5431)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'a73a8d84-c8ca-2a06-5431'
+  rocket:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/a73a8d84-c8ca-2a06-5431 && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  gqb7wfeew:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: All journal entries reviewed
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; ps -eo pid,user,comm,%mem | grep -v grep | head -1; true ; } > /tmp/build-05/proton722
+            echo "stage ok $(wc -c </tmp/build-05/proton722)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'proton722'
+  tweak-webhook:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/proton722 && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  detach_dialog_throws:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Freeze The Canary Fleet Phase
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; touch /tmp/rule.out && mv -v /tmp/rule.out "/tmp/beetle_2020-07-19.copy"; true ; } > /tmp/build-05/thetameadow
+            echo "stage ok $(wc -c </tmp/build-05/thetameadow)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'thetameadow'
+  spin-up:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/thetameadow && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  y:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Currently repairing the user table
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; echo athens manila helsinki austin | tr ' ' '\n' | sort | uniq -u | sort -u | tr -cs '[:alnum:]' '\n'; true ; } > /tmp/build-05/velvetHarborSilver
+            echo "stage ok $(wc -c </tmp/build-05/velvetHarborSilver)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'velvetHarborSilver'
+  xi-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/velvetHarborSilver && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  oscar_server:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: RTS from shredding
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; df -h|tail -n +2|sort -n -k 5|tr -s ' '; true ; } > /tmp/build-05/MeAdOwDUSTYcAche
+            echo "stage ok $(wc -c </tmp/build-05/MeAdOwDUSTYcAche)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'MeAdOwDUSTYcAche'
+  ken-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/MeAdOwDUSTYcAche && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  f_TitleTraceProfile4:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: The mailing list is fine
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; cut -c1-11 /etc/profile | sort -u | fold -w 35; true ; } > /tmp/build-05/backupneutronhollow
+            echo "stage ok $(wc -c </tmp/build-05/backupneutronhollow)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'backupneutronhollow'
+  dotnet8-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/backupneutronhollow && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  Where-LabelObject:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Rotation post go live
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; for val in gallery scratch manual old; do echo "<$val>"; done | head -3; true ; } > /tmp/build-05/otter.zeta
+            echo "stage ok $(wc -c </tmp/build-05/otter.zeta)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'otter.zeta'
+  add-metrics:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/otter.zeta && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  the_scene:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Roll up lookup table mk2
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; gzip -c /etc/os-release >'/tmp/result-final.gz' && gzip -cd '/tmp/result-final.gz'; true ; } > /tmp/build-05/ORD-2026-63129
+            echo "stage ok $(wc -c </tmp/build-05/ORD-2026-63129)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'ORD-2026-63129'
+  apr28-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/ORD-2026-63129 && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  instance-clock_stream:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Wrangle tax report
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; for item in ~/.bash*; do basename "${item}";done | paste -sd ' '; true ; } > /tmp/build-05/bog310
+            echo "stage ok $(wc -c </tmp/build-05/bog310)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'bog310'
+  titan2-rc:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/bog310 && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  DATABASE_ROLE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Create signature D
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; builtin echo "   leading spaces"; true ; } > /tmp/build-05/ridgeCopperKappaKernel
+            echo "stage ok $(wc -c </tmp/build-05/ridgeCopperKappaKernel)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'ridgeCopperKappaKernel'
+  full-send:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/ridgeCopperKappaKernel && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  succesful:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: third time lucky shipping
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; cp /etc/shells "/tmp/todo-session.list" && sed -i -e 's|/bin/|/opt/bin/|' "/tmp/todo-session.list" && grep -c . "/tmp/todo-session.list"; true ; } > /tmp/build-05/LEDGER_QUICK
+            echo "stage ok $(wc -c </tmp/build-05/LEDGER_QUICK)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'LEDGER_QUICK'
+  d-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/LEDGER_QUICK && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  interfaceVal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Two minute warning deletion
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; find /usr/share -maxdepth 3 -mindepth 1 -iname '*.conf' -exec stat -c %F {} \; 2>/dev/null | awk -F/ '{print $NF}' | sort | uniq -c | sort -rn | head -5; true ; } > /tmp/build-05/RHg
+            echo "stage ok $(wc -c </tmp/build-05/RHg)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'RHg'
+  hotfix-6516:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/RHg && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  PWD_RANDOM:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Rally at the ground truth labels
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; awk -F':' '$4 != "" {print $1}' /etc/group|fmt -w 56; true ; } > /tmp/build-05/txt
+            echo "stage ok $(wc -c </tmp/build-05/txt)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'txt'
+  add-parse-bug:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/txt && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  NewPrompt:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: doStreamStagingTable
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; command grep -i /usr/bin /etc/shells | sort | uniq -c; true ; } > /tmp/build-05/UserReef
+            echo "stage ok $(wc -c </tmp/build-05/UserReef)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'UserReef'
+  v4-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/UserReef && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  MEADOW_040443:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: On success resolve the NTP sync
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; diff <(echo 'Hello there') <(echo 'foo bar baz') || echo different; true ; } > /tmp/build-05/bEamRIDgeQuARklAyER
+            echo "stage ok $(wc -c </tmp/build-05/bEamRIDgeQuARklAyER)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'bEamRIDgeQuARklAyER'
+  uma-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/bEamRIDgeQuARklAyER && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  url34s:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: TrueUpPettyCash
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; ls -s1X /usr/bin/?? | tac; true ; } > /tmp/build-05/QUARK
+            echo "stage ok $(wc -c </tmp/build-05/QUARK)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'QUARK'
+  artifacts:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/QUARK && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  b1dbb0637d8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: POKE firmware
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; awk -F ":" '$4 != "" {print $1}' </etc/group |pr -3 -t; true ; } > /tmp/build-05/LOADER_FJORD
+            echo "stage ok $(wc -c </tmp/build-05/LOADER_FJORD)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'LOADER_FJORD'
+  q4-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/LOADER_FJORD && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  tl_SK:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: click notification bell again
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; if [[ -r /etc/os-release ]]; then echo 'ok'; fi; true ; } > /tmp/build-05/StOCKfraMedrEAM
+            echo "stage ok $(wc -c </tmp/build-05/StOCKfraMedrEAM)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'StOCKfraMedrEAM'
+  auh-check-71:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/StOCKfraMedrEAM && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  TMP_FORMAT:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Unit 26 Roll Up Customer Records
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; stdbuf -oL echo "that's all folks"; true ; } > /tmp/build-05/coastal_queue_noise_garden
+            echo "stage ok $(wc -c </tmp/build-05/coastal_queue_noise_garden)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'coastal_queue_noise_garden'
+  q4-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/coastal_queue_noise_garden && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  struct_Stream-convert:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: ReconcileQueue9
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; grep -Rs export /etc/skel 2> /dev/null | nl | head -n 8; true ; } > /tmp/build-05/Af
+            echo "stage ok $(wc -c </tmp/build-05/Af)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'Af'
+  q4-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/Af && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  Yv3:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: All timestamps ingested
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; join -t: <(sort /etc/passwd) <(sort /etc/group) | head --lines=3; true ; } > /tmp/build-05/REF-2022-24984
+            echo "stage ok $(wc -c </tmp/build-05/REF-2022-24984)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'REF-2022-24984'
+  fix-parse-redirect:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/REF-2022-24984 && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  armor-header:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Create signature D
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; for w in $(seq 10); do printf '%d %d\n' ${w} $((w * 3)); done; true ; } > /tmp/build-05/WIDGET_SURGE_PRAIRIE_RECEIPT
+            echo "stage ok $(wc -c </tmp/build-05/WIDGET_SURGE_PRAIRIE_RECEIPT)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'WIDGET_SURGE_PRAIRIE_RECEIPT'
+  py311-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/WIDGET_SURGE_PRAIRIE_RECEIPT && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  cfg_StorePromise:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Nothing to backfill
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; cp /etc/os-release /tmp/bear.bak && sed -i -e 's/^NAME=/OS_NAME=/' /tmp/bear.bak && cat /tmp/bear.bak; true ; } > /tmp/build-05/882e738e5868b81b3e8ae997c01b8260066bf4
+            echo "stage ok $(wc -c </tmp/build-05/882e738e5868b81b3e8ae997c01b8260066bf4)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - '882e738e5868b81b3e8ae997c01b8260066bf4'
+  fire-up:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/882e738e5868b81b3e8ae997c01b8260066bf4 && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  v8_4_84:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Assign the timesheets and confirm by email
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; df -h --total|head --lines=4; true ; } > /tmp/build-05/TF8IuGIjRBcfkjsS8IW
+            echo "stage ok $(wc -c </tmp/build-05/TF8IuGIjRBcfkjsS8IW)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'TF8IuGIjRBcfkjsS8IW'
+  min-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/TF8IuGIjRBcfkjsS8IW && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  feature-depth-map-tiny:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Onwards to enforcement
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; echo 42 > "/tmp/journal-binder.tmp" && wc -c < "/tmp/journal-binder.tmp"; true ; } > /tmp/build-05/SpriteReportEcho
+            echo "stage ok $(wc -c </tmp/build-05/SpriteReportEcho)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'SpriteReportEcho'
+  blast-off:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/SpriteReportEcho && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  internal_publish:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Agar gets spun now
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; kill -l | head -n 2; true ; } > /tmp/build-05/pr0xy.g4dge7.neu7r0n.hol1ow.m3adow
+            echo "stage ok $(wc -c </tmp/build-05/pr0xy.g4dge7.neu7r0n.hol1ow.m3adow)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'pr0xy.g4dge7.neu7r0n.hol1ow.m3adow'
+  chore-6848:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/pr0xy.g4dge7.neu7r0n.hol1ow.m3adow && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+  x_val:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: ExportBlogPostPhase
+          command: |
+            mkdir -p /tmp/build-05
+            { set +o pipefail 2>/dev/null; cat /etc/passwd | grep -FH sync | head -n15; true ; } > /tmp/build-05/S5xDaOTpv
+            echo "stage ok $(wc -c </tmp/build-05/S5xDaOTpv)"; echo
+      - persist_to_workspace:
+          root: /tmp/build-05
+          paths:
+            - 'S5xDaOTpv'
+  anothr-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build-05
+      - run:
+          name: Check my upstream
+          command: |
+            # noop touch read
+            : < /tmp/build-05/S5xDaOTpv && echo "ok" || true
+      - run:
+          name: Retrieve tree
+          command: git clone --depth 1 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unpack dependencies
+          command: tar -xj -f build-binaries-v2.tar.bz2
+      - run:
+          name: Smoke check
+          command: sleep 15
+      - run:
+          name: Pre-run checks
+          command: g++ --version
+      - run:
+          command: /bin/bash -c "./fire-orchestrator"
+
+workflows:
+  verify:
+    jobs:
+      - url34s
+      - artifacts:
+          requires:
+            - url34s
+      - Theta_j:
+          requires:
+            - url34s
+      - canary:
+          requires:
+            - Theta_j
+      - internal_publish:
+          requires:
+            - Theta_j
+      - chore-6848:
+          requires:
+            - internal_publish
+      - v8_4_84:
+          requires:
+            - internal_publish
+      - min-smoke:
+          requires:
+            - v8_4_84
+      - PWD_RANDOM:
+          requires:
+            - v8_4_84
+      - add-parse-bug:
+          requires:
+            - PWD_RANDOM
+      - Where-LabelObject:
+          requires:
+            - PWD_RANDOM
+      - add-metrics:
+          requires:
+            - Where-LabelObject
+      - Yv3:
+          requires:
+            - Where-LabelObject
+      - fix-parse-redirect:
+          requires:
+            - Yv3
+      - tl_SK:
+          requires:
+            - Yv3
+      - auh-check-71:
+          requires:
+            - tl_SK
+      - feature-depth-map-tiny:
+          requires:
+            - tl_SK
+      - blast-off:
+          requires:
+            - feature-depth-map-tiny
+      - cfg_StorePromise:
+          requires:
+            - feature-depth-map-tiny
+      - fire-up:
+          requires:
+            - cfg_StorePromise
+      - deadQ:
+          requires:
+            - cfg_StorePromise
+      - nova-final:
+          requires:
+            - deadQ
+      - struct_Stream-convert:
+          requires:
+            - deadQ
+      - q4-canary:
+          requires:
+            - struct_Stream-convert
+      - armor-header:
+          requires:
+            - struct_Stream-convert
+      - py311-test:
+          requires:
+            - armor-header
+      - TMP_FORMAT:
+          requires:
+            - armor-header
+      - q4-cleanup:
+          requires:
+            - TMP_FORMAT
+      - DATABASE_ROLE
+      - full-send:
+          requires:
+            - DATABASE_ROLE
+      - oscar_server:
+          requires:
+            - DATABASE_ROLE
+      - ken-test:
+          requires:
+            - oscar_server
+      - gqb7wfeew:
+          requires:
+            - oscar_server
+      - tweak-webhook:
+          requires:
+            - gqb7wfeew
+      - MEADOW_040443:
+          requires:
+            - gqb7wfeew
+      - uma-push:
+          requires:
+            - MEADOW_040443
+      - succesful:
+          requires:
+            - MEADOW_040443
+      - d-v2:
+          requires:
+            - succesful
+      - detach_dialog_throws:
+          requires:
+            - succesful
+      - spin-up:
+          requires:
+            - detach_dialog_throws
+      - IS_HARD:
+          requires:
+            - detach_dialog_throws
+      - ruby3-cov:
+          requires:
+            - IS_HARD
+      - NewPrompt:
+          requires:
+            - IS_HARD
+      - v4-canary:
+          requires:
+            - NewPrompt
+      - fk_shim:
+          requires:
+            - NewPrompt
+      - rocket:
+          requires:
+            - fk_shim
+      - y:
+          requires:
+            - fk_shim
+      - xi-push:
+          requires:
+            - y
+      - interfaceVal:
+          requires:
+            - y
+      - hotfix-6516:
+          requires:
+            - interfaceVal
+      - b1dbb0637d8:
+          requires:
+            - interfaceVal
+      - q4-smoke:
+          requires:
+            - b1dbb0637d8
+      - the_scene:
+          requires:
+            - b1dbb0637d8
+      - apr28-ship:
+          requires:
+            - the_scene
+      - f_TitleTraceProfile4:
+          requires:
+            - the_scene
+      - dotnet8-release:
+          requires:
+            - f_TitleTraceProfile4
+      - x_val:
+          requires:
+            - f_TitleTraceProfile4
+      - anothr-run:
+          requires:
+            - x_val
+      - instance-clock_stream:
+          requires:
+            - x_val
+      - titan2-rc:
+          requires:
+            - instance-clock_stream
